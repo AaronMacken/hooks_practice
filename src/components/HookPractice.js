@@ -53,7 +53,7 @@ const renderMessage = unreadMessages => {
 
 const getUnreadMessages = posts => {
     let numUnread = 0;
-    console.log('getting messages');
+    
     posts.forEach(post => {
         if (!post.read) {
             numUnread ++;
