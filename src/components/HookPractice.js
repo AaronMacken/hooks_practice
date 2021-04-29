@@ -1,6 +1,6 @@
 import './HookPractice.css';
 
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useEffect, useMemo } from 'react';
 
 import { Container as Grid, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 // TODO - Use state to conditionally style read or unread posts
 
 // TODO - Style Post Card - WIP
-// TODO - set up lint in this project
+// TODO - set up lint in this project - React ESLint?
 
 // TODO - make component for postCard
 
@@ -51,9 +51,9 @@ const renderMessage = unreadMessages => {
     }
 };
 
-// TODO: need to implement useMemo - FUNCTIONAL & CLASS
 const getUnreadMessages = posts => {
     let numUnread = 0;
+    
     posts.forEach(post => {
         if (!post.read) {
             numUnread ++;
@@ -65,16 +65,16 @@ const getUnreadMessages = posts => {
 
 function HookPractice(props) {
     const [posts, dispatch] = useReducer(reducer, props.posts);
+    const unreadMessages = useMemo(() => getUnreadMessages(posts), [posts]);
+
 
     useEffect(() => {
         dispatch({type: 'TRANSFORM'});
     }, []);
 
     useEffect(() => {
-        const numUnread = getUnreadMessages(posts);
-
-        document.title = `You have ${numUnread} posts!`
-    }, [posts]);
+        document.title = `You have ${unreadMessages} posts!`
+    }, [unreadMessages]);
 
     const renderPosts = posts.map(post => {
         return (
@@ -95,7 +95,7 @@ function HookPractice(props) {
         <Grid>
             <Row>
                 <Col xs={12}>
-                    { renderMessage(getUnreadMessages(posts)) }
+                    { renderMessage(unreadMessages) }
                 </Col>
                 { renderPosts }
             </Row>
