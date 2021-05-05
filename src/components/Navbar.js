@@ -1,25 +1,22 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
+import { Navbar as BaseNavbar } from "react-bootstrap";
 
-export default class Navbar extends Component {
-  render() {
-    return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-brand">Navbar</button>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <button>Home</button>
-            <button>About</button>
-          </div>
-        </div>
-      </nav>
-    );
-  }
+import { PostContext } from "../context/PostContext";
+
+function Navbar() {
+  const postData = useContext(PostContext);
+
+  return (
+    <BaseNavbar>
+      <BaseNavbar.Brand href="#home">Navbar with text</BaseNavbar.Brand>
+      <BaseNavbar.Toggle />
+      <BaseNavbar.Collapse className="justify-content-end">
+        <BaseNavbar.Text>
+          Number of messages: {Object.keys(postData).length}
+        </BaseNavbar.Text>
+      </BaseNavbar.Collapse>
+    </BaseNavbar>
+  );
 }
+
+export default Navbar;

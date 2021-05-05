@@ -1,18 +1,17 @@
-import "./HookPractice.css";
+import "./ReducerAndMemo.css";
 
-import React, { useReducer, useEffect, useMemo } from "react";
+import React, { useReducer, useContext, useEffect, useMemo } from "react";
+
+import { PostContext } from "../context/PostContext";
 
 import { Container as Grid, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 // TODO - Set up SCSS
-// TODO - Set up Flexbox
-
 // TODO - Use state to conditionally style read or unread posts
 
 // TODO - Style Post Card - WIP
-// TODO - set up lint in this project - React ESLint?
 
 // TODO - make component for postCard
 
@@ -65,8 +64,9 @@ const getUnreadMessages = (posts) => {
   return numUnread;
 };
 
-function HookPractice(props) {
-  const [posts, dispatch] = useReducer(reducer, props.posts);
+function HookPractice() {
+  const postData = useContext(PostContext);
+  const [posts, dispatch] = useReducer(reducer, postData);
   const unreadMessages = useMemo(() => getUnreadMessages(posts), [posts]);
 
   useEffect(() => {
