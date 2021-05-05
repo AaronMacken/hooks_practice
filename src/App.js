@@ -1,26 +1,26 @@
-import './App.css';
+import "./App.css";
 
-import React from 'react';
+import React from "react";
 
-import HookPractice from './components/HookPractice';
+import HookPractice from "./components/HookPractice";
 
 const initialState = [
   {
     postId: 1,
     post: "Jessica is such a dumb whore that just fucks everyone",
-    author: "Jenny"
+    author: "Jenny",
   },
   {
     postId: 2,
     post: "I'm trying to hang out with Jessica!",
-    author: "Steve"
+    author: "Steve",
   },
   {
     postId: 3,
     post: "I like food!",
-    author: "Aaron"
-  }
-]
+    author: "Aaron",
+  },
+];
 
 function App() {
   return (
